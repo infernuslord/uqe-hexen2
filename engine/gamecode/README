@@ -1,0 +1,174 @@
+
+Game code for Hexen2 / H2MP / HexenWorld
+
+Changes
+-------
+
+2011-01-05 (1.20):
+===================
+- Bumped version number to 1.20.
+- Fixed trigger_crosslevel() with spawnflag 8, i.e. the clash with
+  SPAWNFLAG_ACTIVATED. We now just set inactive property back to FALSE
+  after calling InitTrigger(). Thanks to Keith Rozett.
+- Added more entity fixes, this time for tibet2 and tibet9 maps of the
+  expansion pack.
+2010-11-27 (1.19b):
+===================
+- Added a "mapfixes" section. Added entity fixes for romeric5.bsp and
+  egypt5.bsp among the mapfixes.
+2008-01-01 (1.19a):
+===================
+- Updated the patch shell scripts for much better compatibility with BSD
+  and other systems. No other source code or binary data change.
+2006-03-18 (1.19):
+===================
+- Origin fixes for tomed fires of vorpal sword and purifier: paladin used
+  to fire them always from the non-crouched eye position, and it was even
+  the worst when he was looking up (and down). You won't be shooting your
+  back when standing just in front of a wall and fire your tomed purifier
+  to the sky, from now on ;)
+2006-12-01 (1.16a):
+===================
+- Fixed an obscure bug where the assasin with her 4th weapon uses the tome
+  of power and can't fire it. The bug was reported by Mathias Schlueter to
+  Jacques 'Korax' Krige who forwarded the report to us.  (The bug seems to
+  have been introduced in gamecode-1.12g when a patch from Pa3PyX's sources
+  was merged. Pa3PyX's own progs as part of his 1.15 package also has the
+  same bug.)
+2006-10-30 (1.16) :
+===================
+- Fixed the dreaded mezzoman bug causing the following error:
+	SV_StartSound: fangel/deflect.wav not precached
+	ADDRESS -14227(?) 537(last_attack).last_attack -14226(?)
+	mezzoman.hc : mezzo_reflect_trig_touch
+	<NO FUNCTION>
+	assignment to world entity
+	Host_Error: Program error
+- Merged a probably better fix for the above bug. (from Steven).
+- Disabled impulse 11 (ServerflagsCommand): it is a dev command, can
+  be issued from any client and may screw up the server pretty bad..
+- Made the hexen2 progs to work with demo version 1.11: the original
+  demo version excluded the necromancer and crusader classes, but the
+  later one didn't care and included them. changing some precache_model3
+  and precache_sound3 to precache_model and precache_sound solves it.
+  the pak file of 1.11 demo version already contains the necessary stuff.
+- Made the hexenworld progs to work with demo version 1.11: Raven
+  actually did all of the changes, but they seem to have missed
+  changing the precache_model2 calls to precache_model in wp_art.hc
+  which prevented crusader and necromancer classes to be played with.
+- Ported the demo-1.11 precache compatibility changes from hexen2 to
+  the mission pack. the mission pack actually has nothing to do with
+  the demo version, but this is for the sake of the two trees being
+  in sync as much as possible.
+- Ported the demo-1.11 precache compatibility changes from hexenworld to
+  siege. siege actually doesn't have much to do with the demo, but this
+  is for the sake of the two trees being in sync as much as possible.
+- Cleaned up and tweaked hexenworld and siege map cycling.
+- Fixed hexen2 and hexenworld server crashes upon deathmatch level change
+  in cases of a custom map being run and there is no map cycling. mission
+  pack actually didn't used to crash but it always failed changing into
+  a new level. it is now fixed, as well.
+- Since version 1.11 of hexen2 demo already contains the demo3 level and
+  it also has necessary stuff for running the hexenworld dm maps, added
+  demo3 and the hw dm maps to FindDMLevel(). Similarly changed the hexen2
+  and the mission pack versions.
+2006-03-20 (1.15) :
+===================
+- hw: fixed the server crash when the server is spawned with dmmode 1.
+  solution found in the ghost mod.
+- hw: properly notify users when dmmode is changed. also remove the
+  brightfield from the icon holder when dmmode 1 is abandoned. code
+  found in the the ghost mode.
+- hw / siege: broadcast the names of the current map and the
+  next map in cycle to all clients
+- noexit is supposed to matter only for deathmatch, not for coop
+  and singleplayer
+- CheckRules (timelimit and fraglimit) is supposed to matter only
+  for deathmatch, not for coop and singleplayer
+- fixed those double semicolons.
+- hw: killed the irritating Poisong_die dprint
+- fixed those famous spelling errors.
+2005-08-09 (1.14) :
+===================
+- Disallowed cycling to a weapon without proper mana (S.A)
+- Enabled impulse 34, (puzzle piece inventory list)  (S.A)
+2005-07-29        :
+===================
+- Map cycling: renamed map_name to a more intuitive map_next
+  Cleaned up some dprint's
+2005-06-25        :
+===================
+- Bumped the teleport-push speed to a highest safe value of 225
+  (250 is still safe, but just in case)  and restricted that to
+  the Cathedral map when not in deathmatch.  Otherwise, Raven's
+  original value (300) is used.
+2005-05-08	  :
+===================
+- added Pa3PyX' fire delay bits for paladin's setstaff
+
+2005-03-17 (1.12h):
+===================
+Merged the actual H2MP 1.12-1.12a patch and it has been missing
+here in the CVS for ages. That no one told me about it is a bit
+embarassing....
+
+2005-02-23 (1.12g):
+===================
+Merged a bunch of fixes/adjustments from Pa3PyX' sources:
+- fixed ravenstaff bug where splitting missiles would collide
+  with each other
+- setstaff tomed and untomed fire rates now fps independent
+- crossbow fire rate fps now independent (also makes fire rate
+  slightly faster, but I liked it ;)
+- no more 20 tornadoes per second from meteor staff at 200 fps
+- framerate independent Flame Orb fire procedure
+- fix demoness abilities according to the manual
+- assasin backstab starts at level 6
+- crusader holy strength starts at level 6
+- necromancer sickle steal adjustments to make it really useful
+- assasin cloak ability re-write
+- start crusader full-mana ability at level3
+
+2005-02-15 (1.12f):
+===================
+- added a separate patch file which allows compiling boss maps into
+  hwprogs.dat. this is not of much use, because coop seems broken..
+- updated the hexenworld boss files according to H2MP. although coop
+  is broken as of now, maybe someone messes with these one day...
+- added stubs for the hexenworld missing boss-map functions. hwsv no
+  longer crashes on maps rider1a, rider2c, romeric6, meso9 and eidolon.
+
+2005-01-27:
+===========
+- Applied Kor Skarn's further changes to the Siege hcode:  This is the
+  code to the hwprogs.dat in "sgcycle.zip". Seems to be first intended
+  for Rival Kingdoms?...
+2005-01-26:
+===========
+- Applied map cycling patch for Siege (similar to the one below)
+- Added the hcode for Siege.
+- Applied map cycling for HexenWorld (by Kor Skarn):  Server side mod,
+so only the server needs to have the new hwprogs.dat and strings.txt.
+The new strings.txt can then be edited for the required mapnames.
+* map names must stay between map_sequence_start and map_sequence_end
+* only the first occurence of a mapname is used to determine next map
+* if server is running a map that is not in the list the same map will
+  reload when game ends.
+* when server reaches the end of the list, the last map reloads when
+  game ends it does NOT make a loop. To make a loop, add the name of
+  the first map after the last one (it looks for a mapname matching
+  current one and takes the following name for next map)
+* any number of maps can be put in it
+* remove the map entries AND "map_sequence_start / map_sequence_end"
+  strings (or use old strings.txt): server works as without the mod.
+
+1.12d	Reduce the speed of the teleporting process' pushing you
+	forward. Fixes the unreachable Cathedral balcony issue for
+	me (for both Hexen2 and H2MP) (2005-01-06).
+1.12c   fix eidolon loses his hostility upon destruction of the orb.
+	(2005-01-05, adaptation of eidolon.hc from H2MP)
+1.12b	fix eidolon not jumping off the ledge (hc/h2/triggers.hc)
+	(2004-12-09)
+
+1.12a   Raven's original 1.12a hcode for the mission pack (initial)
+1.11    Raven's original 1.11 hcode for original Hexen2 (initial)

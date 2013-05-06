@@ -1,0 +1,48 @@
+;$load baseq2/gfx/gamepal.lbm
+;$mippal
+;$mipdir e1u1            ; put everything in textures/e1u1/*.wal
+
+$load baseq2/gfx/textures/episode1/base/rtex413.pcx
+;$load baseq2/gfx/textures/episode1/base/compu2_1.pcx
+
+; colormap goes from 0 - 200% intensity in 64 levels of 256 entries
+; the brightest color table is first
+; 0 fullbright colors in the palette
+; quake also gets the game palette from this resulting pcx file
+;$colormap       colormap
+;$inverse16table
+
+$mippal
+$mipdir e1u1            ; put everything in textures/e1u1/*.wal
+
+;============ TEMP TEMP TEMP ==========
+
+$load baseq2/gfx/textures/episode1/base/rtex413.pcx
+$mip    rtex413   0      0      128      128
+
+;$load baseq2/gfx/textures/episode1/base/compu2_1.pcx
+;$mip    compu2_1  0      0      128      128
+
+;$load baseq2/gfx/textures/episode1/base/station5.lbm
+;$mip    station5   16      16      128      128 
+
+;$load baseq2/gfx/textures/episode1/temp/crate01.lbm
+;$mip    crate1_1          16      16      64      64
+;$mip    crate1_2          88      16      64      64
+;$mip    crate1_3          160     16      64      64
+;$mip    crate1_4          232     16      64      64
+;$mip    crate1_5          16      88      64      64
+;$mip    crate1_6          88      88      64      64
+;$mip    crate1_7          160     88      64      64
+;$mip    crate1_8          232     88      64      64
+
+;$load baseq2/gfx/textures/episode1/base/cgrate.lbm
+;$mip    +0cgrate1_1   16      16      64      32        anim +1cgrate1_1
+;$mip    +1cgrate1_1   232     16      64      32        anim +0cgrate1_1
+
+;$load baseq2/gfx/textures/episode1/base/comp10.lbm
+;$mip    +0comp10_1   16      16      64      64		anim +1comp10_1
+;$mip    +1comp10_1   88      16      64      64		anim +2comp10_1
+;$mip    +2comp10_1   160     16      64      64		anim +3comp10_1
+;$mip    +3comp10_1   232     16      64      64		anim +4comp10_1
+;$mip    +4comp10_1   16      88      64      64		anim +0comp10_1

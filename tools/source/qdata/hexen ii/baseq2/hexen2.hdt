@@ -1,0 +1,20 @@
+
+
+$load baseq2/gfx/textures/episode1/base/rtex413.pcx
+;$load baseq2/gfx/textures/episode1/base/compu2_1.pcx
+
+; colormap goes from 0 - 200% intensity in 64 levels of 256 entries
+; the brightest color table is first
+; 0 fullbright colors in the palette
+; quake also gets the game palette from this resulting pcx file
+;$colormap       colormap
+;$inverse16table
+
+$mippal
+$mipdir e1u1            ; put everything in textures/e1u1/*.wal
+
+;============ TEMP TEMP TEMP ==========
+
+$load baseq2/gfx/textures/episode1/base/rtex413.pcx
+$mip    rtex413   0      0      128      128
+
